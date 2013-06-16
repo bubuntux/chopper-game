@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.googlecode.playn</groupId>
+        <artifactId>playn-project</artifactId>
+        <version>1.7</version>
+    </parent>
+
+    <groupId>org.quesito</groupId>
+    <artifactId>rancio</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Rancio Metaproject</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.7</java.version>
+        <playn.version>1.7</playn.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>java</id>
+            <modules>
+                <module>java</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>android</id>
+            <modules>
+                <module>android</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ios</id>
+            <modules>
+                <module>ios</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>html</id>
+            <modules>
+                <module>html</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>flash</id>
+            <modules>
+                <module>flash</module>
+            </modules>
+        </profile>
+    </profiles>
+    <modules>
+        <module>assets</module>
+        <module>core</module>
+    </modules>
+
+    <!-- Common dependencies for all modules -->
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.5</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Common plugin configuration for all children -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

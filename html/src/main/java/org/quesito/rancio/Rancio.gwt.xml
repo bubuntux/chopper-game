@@ -1,0 +1,11 @@
+<module rename-to='rancio'>
+  <inherits name='playn.PlayN'/>
+  <inherits name='RancioAssets'/>
+
+  <source path='core'/>
+  <source path='html'/>
+
+  <public path="resources" />
+
+  <entry-point class='org.quesito.rancio.html.RancioHtml'/>
+</module>
