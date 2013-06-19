@@ -1,0 +1,16 @@
+# Wiki #
+wiki
+
+# Hidden Files #
+.*
+
+# Intellij Files #
+*.iml
+
+# Binary Files #
+*.class
+target
+
+# Package Files #
+*.jar
+*.war
