@@ -1,11 +1,11 @@
 package org.quesito.rancio.core;
 
+import java.util.Random;
 import playn.core.GroupLayer;
 import playn.core.Image;
 
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
-import java.util.Random;
 
 public class World {
 
@@ -14,7 +14,7 @@ public class World {
 	private final ScrollingGroup _border;
 
 	public World() {
-		int Rx=0, Ry=0;
+		int Rx = 0, Ry;
 		Random r = new Random();
 
 		_bg = new ScrollingImage("panorama.jpg", 0.015f);

@@ -1,5 +1,8 @@
 package org.quesito.rancio.core;
 
+import org.quesito.rancio.core.inputs.KeyboardListener;
+import org.quesito.rancio.core.inputs.MouseListener;
+import org.quesito.rancio.core.inputs.TouchListener;
 import playn.core.Game;
 import playn.core.GroupLayer;
 
@@ -25,6 +28,10 @@ public class Rancio extends Game.Default {
 		rootLayer.add(_world.getLayer());
 		rootLayer.addAt(_chopper.getLayer(), 150, 100);
 
+		initListeners();
+	}
+
+	private void initListeners() {
 		if (keyboard().hasHardwareKeyboard()) {
 			keyboard().setListener(new KeyboardListener(_chopper));
 		}

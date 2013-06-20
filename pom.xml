@@ -18,6 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
         <playn.version>1.8-SNAPSHOT</playn.version>
+        <tripleplay.version>1.8-SNAPSHOT</tripleplay.version>
     </properties>
 
     <repositories>

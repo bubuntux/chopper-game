@@ -15,6 +15,8 @@ public class Chopper {
 	private final ImageLayer _layer;
 	private float _speedUp = 0.15f;
 	private float _maxSpeedUp = -12f;
+	private float _speedForward = 0.15f;
+	private float _maxSpeedForward = -12f;
 	private boolean _falling;
 	private float _weight = 0.01f;
 	private float _acceleration;

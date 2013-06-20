@@ -1,5 +1,6 @@
-package org.quesito.rancio.core;
+package org.quesito.rancio.core.inputs;
 
+import org.quesito.rancio.core.Chopper;
 import playn.core.Keyboard;
 
 public class KeyboardListener extends Keyboard.Adapter {
