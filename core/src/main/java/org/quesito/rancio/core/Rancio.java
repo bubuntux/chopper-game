@@ -1,56 +1,36 @@
 package org.quesito.rancio.core;
 
-import org.quesito.rancio.core.inputs.KeyboardListener;
-import org.quesito.rancio.core.inputs.MouseListener;
-import org.quesito.rancio.core.inputs.TouchListener;
+import org.quesito.rancio.core.screens.MenuScreen;
 import playn.core.Game;
-import playn.core.GroupLayer;
-
-import static playn.core.PlayN.graphics;
-
-import static playn.core.PlayN.*;
+import playn.core.util.Clock;
+import tripleplay.game.ScreenStack;
 
 public class Rancio extends Game.Default {
 
-	private Chopper _chopper;
-	private World _world;
+	public static final int UPDATE_RATE = 50;
+	private final Clock.Source _clock;
+	private final ScreenStack _screens;
 
 	public Rancio() {
-		super(60); // call update every 33ms (30 times per second)
+		super(UPDATE_RATE);
+		_clock = new Clock.Source(UPDATE_RATE);
+		_screens = new ScreenStack();
 	}
 
 	@Override
 	public void init() {
-		_world = new World();
-		_chopper = new Chopper();
-
-		GroupLayer rootLayer = graphics().rootLayer();
-		rootLayer.add(_world.getLayer());
-		rootLayer.addAt(_chopper.getLayer(), 150, 100);
-
-		initListeners();
-	}
-
-	private void initListeners() {
-		if (keyboard().hasHardwareKeyboard()) {
-			keyboard().setListener(new KeyboardListener(_chopper));
-		}
-		if (mouse().hasMouse()) {
-			mouse().setListener(new MouseListener(_chopper));
-		}
-		if (touch().hasTouch()) {
-			touch().setListener(new TouchListener(_chopper));
-		}
+		_screens.push(new MenuScreen(_screens));
 	}
 
 	@Override
 	public void update(int delta) {
-		_chopper.update(delta);
-		_world.update(delta);
+		_clock.update(delta);
+		_screens.update(delta);
 	}
 
 	@Override
 	public void paint(float alpha) {
-		// the background automatically paints itself, so no need to do anything here!
+		_clock.paint(alpha);
+		_screens.paint(_clock);
 	}
 }
