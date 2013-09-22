@@ -1,17 +1,20 @@
 package org.quesito.rancio.core;
 
 import java.util.Random;
+import org.quesito.rancio.core.inputs.MouseListener;
 import playn.core.GroupLayer;
 import playn.core.Image;
 
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
+import static playn.core.PlayN.mouse;
 
 public class World {
 
 	private final GroupLayer _layer;
 	private final ScrollingImage _bg;
 	private final ScrollingGroup _border;
+	private final Chopper _chopper;
 
 	public World() {
 		int Rx = 0, Ry;
@@ -32,6 +35,11 @@ public class World {
 
 		_layer.add(_bg.getLayer());
 		_layer.add(_border.getLayer());
+
+		_chopper = new Chopper();
+		_layer.add(_chopper.getLayer());
+
+		mouse().setListener(new MouseListener(_chopper));
 	}
 
 	public GroupLayer getLayer() {
@@ -41,5 +49,6 @@ public class World {
 	public void update(int delta) {
 		_bg.update(delta);
 		_border.update(delta);
+		_chopper.update(delta);
 	}
 }
