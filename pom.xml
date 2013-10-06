@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.googlecode.playn</groupId>
         <artifactId>playn-project</artifactId>
-        <version>1.7.2</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
 
     <groupId>org.quesito</groupId>
@@ -17,9 +17,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
-        <playn.version>1.7.2</playn.version>
-        <tripleplay.version>1.7.2</tripleplay.version>
+        <playn.version>1.8-SNAPSHOT</playn.version>
+        <tripleplay.version>1.8-SNAPSHOT</tripleplay.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>bubuntux-repo</id>
+            <url>http://bubuntux.github.io/mvn-repo/</url>
+        </repository>
+    </repositories>
 
     <profiles>
         <profile>
