@@ -1,6 +1,3 @@
-# Wiki #
-wiki
-
 # Hidden Files #
 .*
 
@@ -13,4 +10,3 @@ target
 
 # Package Files #
 *.jar
-*.war
