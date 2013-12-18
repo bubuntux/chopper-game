@@ -42,5 +42,7 @@ public class Rancio implements ApplicationListener {
 
     @Override
     public void dispose() {
+        texture.dispose();
+        batch.dispose();
     }
 }

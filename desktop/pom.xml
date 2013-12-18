@@ -13,7 +13,7 @@
     <name>Rancio Desktop</name>
 
     <properties>
-        <mainClass>org.quesito.rancio.RancioDesktop</mainClass>
+        <mainClass>org.quesito.rancio.DesktopStarter</mainClass>
     </properties>
 
     <dependencies>
