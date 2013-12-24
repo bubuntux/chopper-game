@@ -32,7 +32,7 @@ public class Chopper extends DynamicGameObject {
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        spriteBatch.draw(_texture, _position.x, _position.y, 100, 50);
+        spriteBatch.draw(_texture, _position.x, _position.y, 1, 1);
     }
 
     @Override
