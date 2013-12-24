@@ -65,7 +65,7 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
         if (_state == GAME_RUNNING) {
-            _state = GAME_PAUSED;
+            //_state = GAME_PAUSED;
         }
     }
 

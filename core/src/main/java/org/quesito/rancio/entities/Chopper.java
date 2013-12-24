@@ -1,31 +1,33 @@
 package org.quesito.rancio.entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.quesito.rancio.World;
 
 /**
  * @author Julio Gutierrez (12/23/13)
  */
 public class Chopper extends DynamicGameObject {
 
-    private final static int CHOPPER_STATE_FALL = 0;
-    private final static int CHOPPER_STATE_RISE = 1;
-    private final static int CHOPPER_STATE_HIT = 2;
+    private static final float ACCEL = 300f;
 
     private final Texture _texture;
-
-    private int _state;
 
     public Chopper(float x, float y) {
         super(x, y);
         _texture = new Texture(Gdx.files.internal("chopper.png"));
-        _state = CHOPPER_STATE_FALL;
     }
 
     @Override
     public void update(float delta) {
-
+        if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) || Gdx.input.isTouched()) {
+            _velocity.add(0, ACCEL * delta);
+        } else {
+            _velocity.add(0, World.GRAVITY * delta);
+        }
+        _position.add(_velocity.scl(delta));
     }
 
     @Override
@@ -37,4 +39,5 @@ public class Chopper extends DynamicGameObject {
     public void dispose() {
         _texture.dispose();
     }
+
 }

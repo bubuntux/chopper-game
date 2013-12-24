@@ -1,7 +1,6 @@
 package org.quesito.rancio;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import org.quesito.rancio.entities.Chopper;
 
 /**
@@ -9,7 +8,7 @@ import org.quesito.rancio.entities.Chopper;
  */
 public class World {
 
-    public static final Vector2 GRAVITY = new Vector2(0, -12);
+    public static final float GRAVITY = -500f;
 
     private final Chopper _chopper;
 
