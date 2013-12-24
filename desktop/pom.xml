@@ -38,12 +38,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>../assets</directory>
-            </resource>
-        </resources>
-
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

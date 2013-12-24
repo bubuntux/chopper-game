@@ -14,6 +14,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.quesito</groupId>
+            <artifactId>rancio-assets</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>${gdx.version}</version>

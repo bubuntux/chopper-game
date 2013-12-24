@@ -16,6 +16,7 @@
 
     <modules>
         <module>core</module>
+        <module>assets</module>
         <module>desktop</module>
     </modules>
 

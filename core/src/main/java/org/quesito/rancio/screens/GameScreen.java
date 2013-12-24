@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.quesito.rancio.World;
-import org.quesito.rancio.WorldRenderer;
 
 /**
  * @author Julio Gutierrez (12/23/13)
@@ -23,7 +22,6 @@ public class GameScreen implements Screen {
     private final OrthographicCamera _guiCam;
     private final SpriteBatch _spriteBatch;
     private final World _world;
-    private final WorldRenderer _worldRenderer;
     private final BitmapFont _font;
 
     private int _state;
@@ -37,7 +35,6 @@ public class GameScreen implements Screen {
         _spriteBatch = new SpriteBatch();
 
         _world = new World();
-        _worldRenderer = new WorldRenderer(_world, _spriteBatch);
 
         _font = new BitmapFont();
 
@@ -112,7 +109,7 @@ public class GameScreen implements Screen {
     private void draw() {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-        _worldRenderer.render();
+        _world.draw(_spriteBatch);
 
         _guiCam.update();
         _spriteBatch.setProjectionMatrix(_guiCam.combined);
@@ -136,10 +133,10 @@ public class GameScreen implements Screen {
     }
 
     private void drawReady() {
-        _font.draw(_spriteBatch, "Press any key to start", 100, 200);
+        _font.draw(_spriteBatch, "Ready?", 10, 20);
     }
 
     private void drawRunning() {
-        _font.draw(_spriteBatch, "playing", 0, 20);
+        _font.draw(_spriteBatch, "Playing", 0, 20);
     }
 }
