@@ -11,7 +11,8 @@ import org.quesito.rancio.World;
  */
 public class Chopper extends DynamicGameObject {
 
-    private static final float ACCEL = 300f;
+    private final float _accelerationUp = 15f;
+    private final float _maxSpeedUp = 5f;
 
     private final Texture _texture;
 
@@ -23,11 +24,16 @@ public class Chopper extends DynamicGameObject {
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) || Gdx.input.isTouched()) {
-            _velocity.add(0, ACCEL * delta);
+            _velocity.add(0, _accelerationUp * delta);
         } else {
             _velocity.add(0, World.GRAVITY * delta);
         }
-        _position.add(_velocity.scl(delta));
+
+        if (_velocity.y > _maxSpeedUp) {
+            _velocity.y = _maxSpeedUp;
+        }
+
+        _position.add(_velocity.cpy().scl(delta));
     }
 
     @Override

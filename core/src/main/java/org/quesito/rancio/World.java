@@ -9,7 +9,7 @@ import org.quesito.rancio.entities.Chopper;
  */
 public class World {
 
-    public static final float GRAVITY = -550f;
+    public static final float GRAVITY = -9.8f;
 
     private final OrthographicCamera _cam;
 
