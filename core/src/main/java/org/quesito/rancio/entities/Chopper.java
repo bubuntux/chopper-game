@@ -13,6 +13,7 @@ public class Chopper extends DynamicGameObject {
 
     private final float _accelerationUp = 15f;
     private final float _maxSpeedUp = 5f;
+    private final float _weight = 0.01f;
 
     private final Texture _texture;
 
@@ -24,9 +25,9 @@ public class Chopper extends DynamicGameObject {
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) || Gdx.input.isTouched()) {
-            _velocity.add(0, _accelerationUp * delta);
+            _velocity.add(0, (_accelerationUp - _weight - World.GRAVITY) * delta);
         } else {
-            _velocity.add(0, World.GRAVITY * delta);
+            _velocity.add(0, -World.GRAVITY * delta);
         }
 
         if (_velocity.y > _maxSpeedUp) {
