@@ -76,7 +76,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        _spriteBatch.dispose();
+        _world.dispose();
     }
 
     private void update(float delta) {
