@@ -41,7 +41,7 @@ public class World implements Disposable {
     public void renderBackground(SpriteBatch spriteBatch) {
         spriteBatch.disableBlending();
         spriteBatch.begin();
-        spriteBatch.draw(_background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        spriteBatch.draw(_background, 0, 0, 10, 15);
       /*  spriteBatch.draw(Assets.backgroundRegion, cam.position.x - FRUSTUM_WIDTH / 2, cam.position.y - FRUSTUM_HEIGHT / 2, FRUSTUM_WIDTH,
                 FRUSTUM_HEIGHT);*/
         spriteBatch.end();
