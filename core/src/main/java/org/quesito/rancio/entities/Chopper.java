@@ -12,9 +12,9 @@ import org.quesito.rancio.World;
  */
 public class Chopper extends DynamicGameObject {
 
-    private final Vector2 _accelation = new Vector2(1f, 3f);
+    private final Vector2 _accelation = new Vector2(1f, 2f);
     private final Vector2 _maxSpeed = new Vector2(6f, 5f);
-    private final float _weight = 0.15f;
+    private final float _weight = 0.05f;
 
     private final Texture _texture;
 
