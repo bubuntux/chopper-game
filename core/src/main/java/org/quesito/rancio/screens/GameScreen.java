@@ -65,13 +65,13 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
         if (_state == GAME_RUNNING) {
-            //_state = GAME_PAUSED;
+            _state = GAME_PAUSED;
         }
     }
 
     @Override
     public void resume() {
-
+        _state = GAME_RUNNING;
     }
 
     @Override
@@ -138,6 +138,6 @@ public class GameScreen implements Screen {
     }
 
     private void drawRunning() {
-        _font.draw(_spriteBatch, "Playing", 0, 20);
+        _font.draw(_spriteBatch, "Score: " + _world.getScore(), 0, 20);
     }
 }

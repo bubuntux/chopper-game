@@ -15,6 +15,10 @@ public abstract class GameObject implements Disposable{
         _position = new Vector2(x, y);
     }
 
+    public Vector2 getPosition() {
+        return _position;
+    }
+
     public abstract void update(float delta);
 
     public abstract void draw(SpriteBatch spriteBatch);

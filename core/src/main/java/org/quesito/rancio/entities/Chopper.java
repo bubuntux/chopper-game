@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import org.quesito.rancio.World;
 
 /**
@@ -11,9 +12,9 @@ import org.quesito.rancio.World;
  */
 public class Chopper extends DynamicGameObject {
 
-    private final float _accelerationUp = 15f;
-    private final float _maxSpeedUp = 5f;
-    private final float _weight = 0.01f;
+    private final Vector2 _accelation = new Vector2(1f, 3f);
+    private final Vector2 _maxSpeed = new Vector2(6f, 5f);
+    private final float _weight = 0.15f;
 
     private final Texture _texture;
 
@@ -25,15 +26,17 @@ public class Chopper extends DynamicGameObject {
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) || Gdx.input.isTouched()) {
-            _velocity.add(0, (_accelerationUp - _weight - World.GRAVITY) * delta);
+            _velocity.add(_accelation.x * delta, (_accelation.y - _weight - World.GRAVITY) * delta);
         } else {
-            _velocity.add(0, -World.GRAVITY * delta);
+            _velocity.add(_accelation.x * delta, -World.GRAVITY * delta);
         }
 
-        if (_velocity.y > _maxSpeedUp) {
-            _velocity.y = _maxSpeedUp;
+        if (_velocity.y > _maxSpeed.y) {
+            _velocity.y = _maxSpeed.y;
         }
-
+        if (_velocity.x > _maxSpeed.x) {
+            _velocity.x = _maxSpeed.x;
+        }
         _position.add(_velocity.cpy().scl(delta));
     }
 

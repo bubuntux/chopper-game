@@ -12,22 +12,37 @@ import org.quesito.rancio.entities.Chopper;
  */
 public class World implements Disposable {
 
-    public static final float GRAVITY = 9.8f;
+    public static final float GRAVITY = 0.98f;
 
     private final OrthographicCamera _cam;
     private final Texture _background;
 
     private final Chopper _chopper;
 
+    private int _score;
+    private float _deltaScore;
+
     public World() {
         _cam = new OrthographicCamera(10, 15);
         _cam.position.set(5, 7.5f, 0);
         _chopper = new Chopper(0.5f, 0);
         _background = new Texture(Gdx.files.internal("background.jpg"));
+        _score = 0;
+        _deltaScore = 0;
+    }
+
+    public int getScore() {
+        return _score;
     }
 
     public void update(float delta) {
+        _deltaScore += delta;
+        if (_deltaScore > 1) {
+            _deltaScore--;
+            _score++; //Increment score with every second. TODO ???
+        }
         _chopper.update(delta);
+        _cam.position.x = _chopper.getPosition().x + 4.5f; // 5 - 0.5 (original positions from constructor)
     }
 
     public void draw(SpriteBatch spriteBatch) {
@@ -42,8 +57,6 @@ public class World implements Disposable {
         spriteBatch.disableBlending();
         spriteBatch.begin();
         spriteBatch.draw(_background, 0, 0, 10, 15);
-      /*  spriteBatch.draw(Assets.backgroundRegion, cam.position.x - FRUSTUM_WIDTH / 2, cam.position.y - FRUSTUM_HEIGHT / 2, FRUSTUM_WIDTH,
-                FRUSTUM_HEIGHT);*/
         spriteBatch.end();
     }
 
@@ -57,5 +70,6 @@ public class World implements Disposable {
     @Override
     public void dispose() {
         _chopper.dispose();
+        _background.dispose();
     }
 }
