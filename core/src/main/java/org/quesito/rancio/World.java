@@ -56,7 +56,7 @@ public class World implements Disposable {
     public void renderBackground(SpriteBatch spriteBatch) {
         spriteBatch.disableBlending();
         spriteBatch.begin();
-        spriteBatch.draw(_background, 0, 0, 10, 15);
+        spriteBatch.draw(_background, 0, 0, 100, 15);
         spriteBatch.end();
     }
 
