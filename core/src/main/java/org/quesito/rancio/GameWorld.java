@@ -40,8 +40,7 @@ public class GameWorld implements Disposable {
         // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         // Set our body's starting position in the world
-        bodyDef.position.set(7.5f, 7.5f);
-
+        bodyDef.position.set(1f, 7.5f);
 
         // Create our body in the world using our body definition
         _chopper = _world.createBody(bodyDef);
@@ -67,10 +66,11 @@ public class GameWorld implements Disposable {
         // Create our body definition
         BodyDef groundBodyDef = new BodyDef();
         // Set its world position
-        groundBodyDef.position.set(new Vector2(0.0f, 0.1f));
+        groundBodyDef.position.set(0.0f, 0.1f);
+        groundBodyDef.type = BodyDef.BodyType.StaticBody;
 
         // Create a body from the defintion and add it to the world
-        Body groundBody = _world.createBody(groundBodyDef);
+        Body ground = _world.createBody(groundBodyDef);
 
         // Create a polygon shape
         PolygonShape groundBox = new PolygonShape();
@@ -78,27 +78,30 @@ public class GameWorld implements Disposable {
         // (setAsBox takes half-width and half-height as arguments)
         groundBox.setAsBox(_cam.viewportWidth, 0.1f);
         // Create a fixture from our polygon shape and add it to our ground body
-        groundBody.createFixture(groundBox, 0.0f);
+        ground.createFixture(groundBox, 0.0f);
         // Clean up after ourselves
         groundBox.dispose();
         ////////////////////////////////// Ground
     }
 
-
     public void update(float delta) {
         Vector2 linearVelocity = _chopper.getLinearVelocity();
+        float xForce = 0.055f;
+        float yForce = 0.0f;
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) && linearVelocity.y < _maxSpeed) {
-            _chopper.applyForceToCenter(0, 1.5f, true);
+            yForce = 1.5f;
         }
+        _chopper.applyForceToCenter(xForce, yForce, true);
 
         if (linearVelocity.y > _maxSpeed) {
             linearVelocity.y = _maxSpeed;
         }
-
-        System.out.println(linearVelocity);
+        if (linearVelocity.x > _maxSpeed) {
+            linearVelocity.x = _maxSpeed;
+        }
 
         _world.step(1 / 45f, 6, 2); //TODO ??
-        _cam.position.x = _chopper.getPosition().x;
+        _cam.position.x = _chopper.getPosition().x + 6.5f;   /// 7.5 - 1  (initial positions)
     }
 
     public void draw() {
