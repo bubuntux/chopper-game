@@ -23,18 +23,20 @@ public class GameWorld implements Disposable {
         _world = new World(_gravity, true);
 
         _cam = new OrthographicCamera(15, 15);
+        _cam.position.set(7.5f, 7.5f, 0); //Half of viewports
         _debugRenderer = new Box2DDebugRenderer();
 
         addDummyBodies();
     }
 
     private void addDummyBodies() {
+        ////////////////////////////////// Chopper
         // First we create a body definition
         BodyDef bodyDef = new BodyDef();
         // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         // Set our body's starting position in the world
-        bodyDef.position.set(0, 0); //TODO Center ???
+        bodyDef.position.set(7.5f, 7.5f);
 
 
         // Create our body in the world using our body definition
@@ -55,6 +57,27 @@ public class GameWorld implements Disposable {
         Fixture fixture = _chopper.createFixture(fixtureDef);
 
         circle.dispose();
+        ////////////////////////////////// Chopper
+
+        ////////////////////////////////// Ground
+        // Create our body definition
+        BodyDef groundBodyDef = new BodyDef();
+        // Set its world position
+        groundBodyDef.position.set(new Vector2(0.0f, 0.1f));
+
+        // Create a body from the defintion and add it to the world
+        Body groundBody = _world.createBody(groundBodyDef);
+
+        // Create a polygon shape
+        PolygonShape groundBox = new PolygonShape();
+        // Set the polygon shape as a box which is twice the size of our view port and 20 high
+        // (setAsBox takes half-width and half-height as arguments)
+        groundBox.setAsBox(_cam.viewportWidth, 0.1f);
+        // Create a fixture from our polygon shape and add it to our ground body
+        groundBody.createFixture(groundBox, 0.0f);
+        // Clean up after ourselves
+        groundBox.dispose();
+        ////////////////////////////////// Ground
     }
 
 
