@@ -16,11 +16,13 @@ public class GameWorld implements Disposable {
     private final OrthographicCamera _cam;
     private final Box2DDebugRenderer _debugRenderer;
 
+    private Body _chopper;
+
     public GameWorld() {
         _gravity = new Vector2(0, -0.98f);
         _world = new World(_gravity, true);
 
-        _cam = new OrthographicCamera(10, 15);
+        _cam = new OrthographicCamera(15, 15);
         _debugRenderer = new Box2DDebugRenderer();
 
         addDummyBodies();
@@ -36,7 +38,7 @@ public class GameWorld implements Disposable {
 
 
         // Create our body in the world using our body definition
-        Body body = _world.createBody(bodyDef);
+        _chopper = _world.createBody(bodyDef);
 
         // Create a circle shape and set its radius to 6
         CircleShape circle = new CircleShape();
@@ -50,17 +52,19 @@ public class GameWorld implements Disposable {
         fixtureDef.restitution = 0.6f; // Make it bounce a little bit
 
         // Create our fixture and attach it to the body
-        Fixture fixture = body.createFixture(fixtureDef);
+        Fixture fixture = _chopper.createFixture(fixtureDef);
 
         circle.dispose();
     }
 
 
     public void update(float delta) {
-        _world.step(1 / 45f, 6, 2); //TODO use delta??
+        _world.step(1 / 45f, 6, 2); //TODO ??
+        _cam.position.x = _chopper.getPosition().x;
     }
 
     public void draw() {
+        _cam.update();
         _debugRenderer.render(_world, _cam.combined);
     }
 
