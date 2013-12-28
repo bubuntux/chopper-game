@@ -1,5 +1,7 @@
 package org.quesito.rancio;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -10,6 +12,7 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public class GameWorld implements Disposable {
 
+    public final float _maxSpeed;
     private final Vector2 _gravity;
     private final World _world;
 
@@ -19,6 +22,7 @@ public class GameWorld implements Disposable {
     private Body _chopper;
 
     public GameWorld() {
+        _maxSpeed = 3f;
         _gravity = new Vector2(0, -0.98f);
         _world = new World(_gravity, true);
 
@@ -51,7 +55,7 @@ public class GameWorld implements Disposable {
         fixtureDef.shape = circle;
         fixtureDef.density = 0.5f;
         fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 0.6f; // Make it bounce a little bit
+        fixtureDef.restitution = 0.05f; // Make it bounce a little bit
 
         // Create our fixture and attach it to the body
         Fixture fixture = _chopper.createFixture(fixtureDef);
@@ -82,6 +86,17 @@ public class GameWorld implements Disposable {
 
 
     public void update(float delta) {
+        Vector2 linearVelocity = _chopper.getLinearVelocity();
+        if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) && linearVelocity.y < _maxSpeed) {
+            _chopper.applyForceToCenter(0, 1.5f, true);
+        }
+
+        if (linearVelocity.y > _maxSpeed) {
+            linearVelocity.y = _maxSpeed;
+        }
+
+        System.out.println(linearVelocity);
+
         _world.step(1 / 45f, 6, 2); //TODO ??
         _cam.position.x = _chopper.getPosition().x;
     }
