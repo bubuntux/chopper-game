@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.quesito.rancio.World;
+import org.quesito.rancio.GameWorld;
 
 /**
  * @author Julio Gutierrez (12/23/13)
@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
 
     private final OrthographicCamera _guiCam;
     private final SpriteBatch _spriteBatch;
-    private final World _world;
+    private final GameWorld _gameWorld;
     private final BitmapFont _font;
 
     private int _state;
@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
 
         _spriteBatch = new SpriteBatch();
 
-        _world = new World();
+        _gameWorld = new GameWorld();
 
         _font = new BitmapFont();
 
@@ -77,7 +77,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         _spriteBatch.dispose();
-        _world.dispose();
+        _gameWorld.dispose();
     }
 
     private void update(float delta) {
@@ -104,13 +104,13 @@ public class GameScreen implements Screen {
     }
 
     private void updateRunning(float delta) {
-        _world.update(delta);
+        _gameWorld.update(delta);
     }
 
     private void draw() {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-        _world.draw(_spriteBatch);
+        _gameWorld.draw();
 
         _guiCam.update();
         _spriteBatch.setProjectionMatrix(_guiCam.combined);
@@ -138,6 +138,6 @@ public class GameScreen implements Screen {
     }
 
     private void drawRunning() {
-        _font.draw(_spriteBatch, "Score: " + _world.getScore(), 0, 20);
+        _font.draw(_spriteBatch, "Score: " , 0, 20);
     }
 }
