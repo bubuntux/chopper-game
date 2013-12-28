@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
 
+import java.util.Random;
+
 /**
  * @author Julio Gutierrez (12/23/13)
  */
@@ -82,6 +84,21 @@ public class GameWorld implements Disposable {
         // Clean up after ourselves
         groundBox.dispose();
         ////////////////////////////////// Ground
+
+        ////////////////////////////////// Random obstacles
+        Random rnd = new Random();
+        BodyDef def = new BodyDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(0.25f);
+        def.type = BodyDef.BodyType.KinematicBody;
+        for (int i = 0; i < 5; i++) {
+            def.position.set(rnd.nextFloat() * 50, rnd.nextFloat() * 10);
+            Body obstacle = _world.createBody(def);
+            obstacle.setLinearVelocity(-0.5f, 0);
+            obstacle.createFixture(shape, 0.0f);
+        }
+        shape.dispose();
+        ////////////////////////////////// Random obstacles
     }
 
     public void update(float delta) {
