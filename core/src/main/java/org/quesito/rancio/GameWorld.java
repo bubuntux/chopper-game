@@ -105,8 +105,11 @@ public class GameWorld implements Disposable {
         Vector2 linearVelocity = _chopper.getLinearVelocity();
         float xForce = 0.055f;
         float yForce = 0.0f;
-        if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) && linearVelocity.y < _maxSpeed) {
+        if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) && linearVelocity.y < _maxSpeed && !Gdx.input.isKeyPressed(Input.Keys.R)) {
             yForce = 1.5f;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.R)) {
+            _chopper.setTransform(1, 5, 0);
+            _chopper.setLinearVelocity(0, 0);
         }
         _chopper.applyForceToCenter(xForce, yForce, true);
 
