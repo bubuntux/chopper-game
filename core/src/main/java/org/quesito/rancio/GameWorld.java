@@ -39,6 +39,7 @@ public class GameWorld implements Disposable {
         ////////////////////////////////// Chopper
         // First we create a body definition
         BodyDef bodyDef = new BodyDef();
+        bodyDef.fixedRotation = true;
         // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         // Set our body's starting position in the world
@@ -67,7 +68,7 @@ public class GameWorld implements Disposable {
         ////////////////////////////////// Ground
         // Create our body definition
         BodyDef groundBodyDef = new BodyDef();
-        // Set its world position
+        // Set its world positionA
         groundBodyDef.position.set(0.0f, 0.1f);
         groundBodyDef.type = BodyDef.BodyType.StaticBody;
 
@@ -88,14 +89,19 @@ public class GameWorld implements Disposable {
         ////////////////////////////////// Random obstacles
         Random rnd = new Random();
         BodyDef def = new BodyDef();
+        def.fixedRotation = true;
+        def.gravityScale = 0;
         CircleShape shape = new CircleShape();
         shape.setRadius(0.25f);
-        def.type = BodyDef.BodyType.KinematicBody;
+        def.type = BodyDef.BodyType.DynamicBody;
         for (int i = 0; i < 5; i++) {
-            def.position.set(rnd.nextFloat() * 50, rnd.nextFloat() * 10);
+            def.position.set(rnd.nextFloat() * 20, rnd.nextFloat() * 10);
             Body obstacle = _world.createBody(def);
-            obstacle.setLinearVelocity(-0.5f, 0);
-            obstacle.createFixture(shape, 0.0f);
+            obstacle.applyForceToCenter(-15.5f, 0, true);
+            Fixture obstacleFixture = obstacle.createFixture(shape, 0.0f);
+            obstacleFixture.setDensity(0.05f);
+            obstacleFixture.setFriction(0.05f);
+            obstacleFixture.setRestitution(0.5f);
         }
         shape.dispose();
         ////////////////////////////////// Random obstacles
@@ -103,7 +109,7 @@ public class GameWorld implements Disposable {
 
     public void update(float delta) {
         Vector2 linearVelocity = _chopper.getLinearVelocity();
-        float xForce = 0.055f;
+        float xForce = 0.555f;
         float yForce = 0.0f;
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) && linearVelocity.y < _maxSpeed && !Gdx.input.isKeyPressed(Input.Keys.R)) {
             yForce = 1.5f;
